@@ -1,25 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { SpotifyService } from "src/app/services/spotify.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: "app-home",
+  templateUrl: "./home.component.html",
   styles: []
 })
 export class HomeComponent implements OnInit {
+  nuevasCanciones: any[] = [];
 
-paises: any[];
+  loading: boolean;
+  error: boolean = false;
+  errorMessage: string;
 
-  constructor( private http: HttpClient ) {
-    console.log("Constructor hecho");
-    this.http.get("https://restcountries.eu/rest/v2/lang/es")
-    .subscribe( (response:any) => {
-      console.log(response);
-      this.paises = response
-    });
-   }
+  constructor(private spotify: SpotifyService) {
+    this.loading = true;
 
-  ngOnInit() {
+    this.spotify.getNewReleases().subscribe(
+      (data: any) => {
+      console.log(data);
+      this.nuevasCanciones = data;
+      this.loading = false;
+      },
+      (errorServicio)=>{
+        console.log(errorServicio);
+        this.error = true;
+        this.loading = false;
+        this.errorMessage = errorServicio.error.error.message;
+      });
   }
 
+  ngOnInit() {}
 }

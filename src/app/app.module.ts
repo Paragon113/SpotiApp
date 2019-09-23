@@ -11,6 +11,12 @@ import { SearchComponent } from './components/search/search.component';
 import { ArtistaComponent } from './components/artista/artista.component';
 import { ROUTES } from './app.routes';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
+
+// Pipes
+import { NoimagePipe } from './pipes/noimage.pipe';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 // Rutas
 
@@ -22,6 +28,10 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
     SearchComponent,
     ArtistaComponent,
     NavbarComponent,
+    NoimagePipe,
+    DomseguroPipe,
+    TarjetasComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
